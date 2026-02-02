@@ -1,0 +1,201 @@
+{
+  "info": {
+    "_postman_id": "cd776226-d9fe-4bea-8e58-3f8aa5bd3b21",
+    "name": "PaymentProject",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "25090269"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Регистрация",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Alex\",\n    \"email\": \"email@bk.ru\",\n    \"password\": \"123test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}auth/register",
+              "host": [
+                "{{HOST}}auth"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Выход",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}auth/logout",
+              "host": [
+                "{{HOST}}auth"
+              ],
+              "path": [
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Авторизация",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"email@bk.ru\",\n    \"password\": \"123test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}auth/login",
+              "host": [
+                "{{HOST}}auth"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}auth/refresh",
+              "host": [
+                "{{HOST}}auth"
+              ],
+              "path": [
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "@Me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNzY5ODc4NjQzLCJleHAiOjE3Njk4ODU4NDN9.zhw3L6XzvnmPM42uwdTicq0m8Tkw1HmiINx4Lrn0K7Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}users/@me",
+              "host": [
+                "{{HOST}}users"
+              ],
+              "path": [
+                "@me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "История платежей",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzY5OTU2Nzg2LCJleHAiOjE3Njk5NjM5ODZ9.gR4k9Ur4tVKoyRTQFSqJ79-T6vBOxcX6RwT1gJ2MS4U",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}payments/",
+              "host": [
+                "{{HOST}}payments"
+              ],
+              "path": [
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Создание платежа",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzY5OTU2Nzg2LCJleHAiOjE3Njk5NjM5ODZ9.gR4k9Ur4tVKoyRTQFSqJ79-T6vBOxcX6RwT1gJ2MS4U",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"amount\": 23,\n    \"description\": \"Велосипед\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}payments/",
+              "host": [
+                "{{HOST}}payments"
+              ],
+              "path": [
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
