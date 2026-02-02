@@ -1,0 +1,55 @@
+services:
+  postgres:
+    container_name: payment-project-db
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DATABASE}
+    ports:
+      - 5433:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - payment-project
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    container_name: payment-project-frontend
+    build:
+      context: .
+      dockerfile: ./docker/frontend/Dockerfile
+    restart: always
+    ports:
+      - 10016:3000
+    depends_on:
+      - backend
+    networks:
+      - payment-project
+
+  backend:
+    container_name: payment-project-backend
+    build:
+      context: .
+      dockerfile: ./docker/backend/Dockerfile
+    restart: always
+    environment:
+      - POSTGRES_URI=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DATABASE}
+    ports:
+      - "20016:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - payment-project
+
+volumes:
+  postgres_data:
+
+networks:
+  payment-project:
